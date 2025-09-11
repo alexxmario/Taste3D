@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* High-performance 3D menu business design system. Dark theme with food-appropriate colors.
+All colors MUST be HSL for optimal performance.
+*/
+
+@layer base {
+  :root {
+    /* Dark theme base colors */
+    --background: 220 20% 8%;
+    --foreground: 30 15% 95%;
+
+    /* Card and surface colors */
+    --card: 220 18% 12%;
+    --card-foreground: 30 15% 95%;
+
+    --popover: 220 18% 12%;
+    --popover-foreground: 30 15% 95%;
+
+    /* Brand colors - warm gold for luxury feel */
+    --primary: 38 90% 60%;
+    --primary-foreground: 220 20% 8%;
+
+    /* Secondary warm orange for food appeal */
+    --secondary: 25 85% 55%;
+    --secondary-foreground: 220 20% 8%;
+
+    /* Muted colors for subtle elements */
+    --muted: 220 15% 18%;
+    --muted-foreground: 30 8% 65%;
+
+    /* Accent for highlights */
+    --accent: 45 95% 65%;
+    --accent-foreground: 220 20% 8%;
+
+    /* Interactive states */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 30 15% 95%;
+
+    /* Borders and inputs */
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 38 90% 60%;
+
+    --radius: 0.75rem;
+
+    /* Performance-focused gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(220 18% 10%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(220 15% 15%) 100%);
+    --gradient-accent: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+    
+    /* High-performance animations */
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* Shadows for depth */
+    --shadow-soft: 0 4px 12px -2px hsl(220 20% 4% / 0.4);
+    --shadow-strong: 0 8px 25px -5px hsl(220 20% 4% / 0.6);
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Dark theme is default - no separate dark class needed */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background: var(--gradient-hero);
+    min-height: 100vh;
+  }
+
+  /* Performance optimizations */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* High-performance button variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-primary to-secondary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-lg;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .btn-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-strong);
+  }
+
+  .btn-hero:active {
+    transform: translateY(0);
+  }
+
+  /* Interactive showcase cards */
+  .showcase-card {
+    @apply relative rounded-xl overflow-hidden cursor-pointer;
+    background: var(--gradient-card);
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .showcase-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-strong);
+  }
+
+  .showcase-card.active {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Performance-optimized animations */
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Three.js canvas optimizations */
+  .three-canvas {
+    transition: var(--transition-fast);
+    will-change: transform;
+  }
+}
