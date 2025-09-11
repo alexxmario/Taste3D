@@ -43,8 +43,17 @@ const Header: React.FC = () => {
             </Button>
           </nav>
 
-          {/* Mobile menu button - pentru viitor */}
-          <div className="md:hidden">
+          {/* Mobile navigation */}
+          <div className="md:hidden flex items-center space-x-4">
+            <Link to="/portofoliu">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-foreground hover:text-primary"
+              >
+                Portofoliu
+              </Button>
+            </Link>
             <Button
               variant="ghost"
               size="sm"

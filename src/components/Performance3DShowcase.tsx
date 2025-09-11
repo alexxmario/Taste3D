@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, useGLTF } from '@react-three/drei';
-import * as THREE from 'three';
 import LazyImage from './LazyImage';
 
 // Import actual food images
@@ -118,6 +117,40 @@ const ShowcaseItem: React.FC<ShowcaseItemProps> = ({ image, title, model: Model,
     return index === 3 ? [0, -1.5, 2] : [0, 0, 0];
   };
   
+  // Get zoom distances based on model index - zoom in more on all models
+  const getZoomDistances = (): { min: number; max: number } => {
+    if (index === 0) { // Carbonara - more zoom
+      return { min: 3.5, max: 8 };
+    } else if (index === 2) { // Crevete - just a bit closer 
+      return { min: 3, max: 7 };
+    } else { // Ciuperci and Sofran - zoom in more
+      return { min: 2.5, max: 6 };
+    }
+  };
+
+  // Get lighting intensity based on model index - brighten shadows for 3rd and 4th models
+  const getLightingIntensity = () => {
+    if (index === 2 || index === 3) { // Crevete and Sofran - brighter lighting
+      return {
+        ambient: 2.0,
+        directional: 2.5,
+        secondary: 1.5,
+        point1: 1.5,
+        point2: 1.2,
+        point3: 1.2
+      };
+    }
+    // Default lighting for other models
+    return {
+      ambient: 1.5,
+      directional: 2.0,
+      secondary: 1.0,
+      point1: 1.2,
+      point2: 0.8,
+      point3: 0.8
+    };
+  };
+  
   // Images maintain their natural aspect ratio
   const getImageClasses = () => {
     return "w-full h-auto";
@@ -176,17 +209,23 @@ const ShowcaseItem: React.FC<ShowcaseItemProps> = ({ image, title, model: Model,
                 <PerspectiveCamera makeDefault position={[0, 0, 8]} />
                 
                 {/* Enhanced lighting for better model visibility */}
-                <ambientLight intensity={1.5} />
+                <ambientLight intensity={getLightingIntensity().ambient} />
                 <directionalLight 
                   position={[10, 10, 5]} 
-                  intensity={2.0}
+                  intensity={getLightingIntensity().directional}
                   castShadow
-                  shadow-mapSize={[1024, 1024]}
+                  shadow-mapSize={[2048, 2048]}
+                  shadow-camera-far={50}
+                  shadow-camera-left={-10}
+                  shadow-camera-right={10}
+                  shadow-camera-top={10}
+                  shadow-camera-bottom={-10}
                 />
-                <directionalLight position={[-10, -10, -5]} intensity={1.0} />
-                <pointLight position={[0, 5, 5]} intensity={1.2} />
-                <pointLight position={[5, 0, 5]} intensity={0.8} />
-                <pointLight position={[-5, 0, 5]} intensity={0.8} />
+                <directionalLight position={[-10, -10, -5]} intensity={getLightingIntensity().secondary} />
+                <pointLight position={[0, 5, 5]} intensity={getLightingIntensity().point1} />
+                <pointLight position={[5, 0, 5]} intensity={getLightingIntensity().point2} />
+                <pointLight position={[-5, 0, 5]} intensity={getLightingIntensity().point3} />
+                
                 
                 {/* 3D Model */}
                 <group rotation={[0, 0, 0]}>
@@ -196,8 +235,8 @@ const ShowcaseItem: React.FC<ShowcaseItemProps> = ({ image, title, model: Model,
                 <OrbitControls 
                   enablePan={false}
                   enableZoom={true}
-                  minDistance={6}
-                  maxDistance={12}
+                  minDistance={getZoomDistances().min}
+                  maxDistance={getZoomDistances().max}
                   autoRotate
                   autoRotateSpeed={0.5}
                   maxPolarAngle={Math.PI * 55 / 180}
