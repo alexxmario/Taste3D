@@ -38,9 +38,9 @@ const HeroSection: React.FC = () => {
             variant="outline"
             size="lg"
             className="text-lg px-8 py-4 min-w-[200px] border-2 border-primary/30 hover:border-primary/60 hover:bg-primary/10"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => document.getElementById('ar')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Începe Acum
+            Încearcă AR
           </Button>
         </div>
 
