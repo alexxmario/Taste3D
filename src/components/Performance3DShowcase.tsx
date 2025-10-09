@@ -5,14 +5,14 @@ import LazyImage from './LazyImage';
 
 // Import actual food images
 import carbonaraPhoto from '../assets/img/carbonara.jpg';
-import ciuperciPhoto from '../assets/img/ciuperci.jpg';
-import crevetePhoto from '../assets/img/crevete.jpg';
+import paniniCapresePhoto from '../assets/img/panini-caprese.jpg';
+import pulledPorkPhoto from '../assets/img/pulled-pork-sandwich.jpg';
 import sofranPhoto from '../assets/img/sofran.jpg';
 
 // Import 3D models as URLs
 import carbonaraModel from '../assets/3d/carbonara.glb?url';
-import ciuperciModel from '../assets/3d/ciuperci.glb?url';
-import creveteModel from '../assets/3d/crevete.glb?url';
+import paniniCapreseModel from '../assets/3d/panini-caprese.glb?url';
+import pulledPorkModel from '../assets/3d/PULLED PORK SANDWICH.glb?url';
 import sofranModel from '../assets/3d/sofran.glb?url';
 
 // 3D food models loaded from GLB files
@@ -36,12 +36,12 @@ const CarbonaraModel = () => {
   return <primitive object={clonedScene} scale={8} position={[0, -1.5, 0]} />;
 };
 
-const CiuperciModel = () => {
-  const { scene } = useGLTF(ciuperciModel);
-  console.log('Ciuperci scene loaded:', scene);
-  
+const PaniniCapreseModel = () => {
+  const { scene } = useGLTF(paniniCapreseModel);
+  console.log('Panini Caprese scene loaded:', scene);
+
   const clonedScene = scene.clone();
-  
+
   clonedScene.traverse((child: any) => {
     if (child.isMesh) {
       child.castShadow = true;
@@ -51,16 +51,16 @@ const CiuperciModel = () => {
       }
     }
   });
-  
-  return <primitive object={clonedScene} scale={15} position={[0, -1.5, 0]} />;
+
+  return <primitive object={clonedScene} scale={12} position={[0, -1.5, 0]} />;
 };
 
-const CreveteModel = () => {
-  const { scene } = useGLTF(creveteModel);
-  console.log('Crevete scene loaded:', scene);
-  
+const PulledPorkModel = () => {
+  const { scene } = useGLTF(pulledPorkModel);
+  console.log('Pulled Pork scene loaded:', scene);
+
   const clonedScene = scene.clone();
-  
+
   clonedScene.traverse((child: any) => {
     if (child.isMesh) {
       child.castShadow = true;
@@ -70,8 +70,8 @@ const CreveteModel = () => {
       }
     }
   });
-  
-  return <primitive object={clonedScene} scale={18} position={[0, -1.5, 0]} />;
+
+  return <primitive object={clonedScene} scale={10} position={[0, -1.5, 0]} />;
 };
 
 const SofranModel = () => {
@@ -96,8 +96,8 @@ const SofranModel = () => {
 // Lazy preload models after initial render
 setTimeout(() => {
   useGLTF.preload(carbonaraModel);
-  useGLTF.preload(ciuperciModel);
-  useGLTF.preload(creveteModel);
+  useGLTF.preload(paniniCapreseModel);
+  useGLTF.preload(pulledPorkModel);
   useGLTF.preload(sofranModel);
 }, 2000);
 
@@ -273,14 +273,14 @@ const Performance3DShowcase: React.FC = () => {
       model: CarbonaraModel
     },
     {
-      image: ciuperciPhoto,
-      title: "Ciuperci Premium",
-      model: CiuperciModel
+      image: paniniCapresePhoto,
+      title: "Panini Caprese",
+      model: PaniniCapreseModel
     },
     {
-      image: crevetePhoto,
-      title: "Creveți Proaspeți", 
-      model: CreveteModel
+      image: pulledPorkPhoto,
+      title: "Pulled Pork Sandwich",
+      model: PulledPorkModel
     },
     {
       image: sofranPhoto,
