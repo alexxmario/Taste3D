@@ -52,7 +52,7 @@ const PaniniCapreseModel = () => {
     }
   });
 
-  return <primitive object={clonedScene} scale={12} position={[0, -1.5, 0]} />;
+  return <primitive object={clonedScene} scale={18} position={[0, -3.5, 0]} rotation={[0, -Math.PI / 2, 0]} />;
 };
 
 const PulledPorkModel = () => {
@@ -71,7 +71,7 @@ const PulledPorkModel = () => {
     }
   });
 
-  return <primitive object={clonedScene} scale={10} position={[0, -1.5, 0]} />;
+  return <primitive object={clonedScene} scale={18} position={[0, -2.5, 0]} />;
 };
 
 const SofranModel = () => {
